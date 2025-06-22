@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dday_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="12dp"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/dday_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="D-Day 제목"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end" />
+
+    <TextView
+        android:id="@+id/dday_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="D-Day"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp" />
+
+</LinearLayout>
