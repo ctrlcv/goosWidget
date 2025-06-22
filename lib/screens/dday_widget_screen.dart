@@ -126,7 +126,7 @@ class _DdayWidgetScreenState extends State<DdayWidgetScreen> {
                       border: ColorUtils.colorsAreEqual(_selectedBackgroundColor, color)
                           ? Border.all(color: Colors.black, width: 3)
                           : null,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(6),
                     ),
                   ),
                 );
@@ -174,7 +174,7 @@ class _DdayWidgetScreenState extends State<DdayWidgetScreen> {
                         border: _selectedTextColor == color
                             ? Border.all(color: Colors.blue, width: 3)
                             : Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                     ),
                   ),
@@ -192,7 +192,7 @@ class _DdayWidgetScreenState extends State<DdayWidgetScreen> {
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: _selectedBackgroundColor.withValues(alpha: _opacity),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(6),
               ),
               child: Column(
                 children: [

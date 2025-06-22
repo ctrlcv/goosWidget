@@ -3,4 +3,6 @@
     <string name="app_name">심플 위젯</string>
     <string name="memo_widget_description">메모 위젯</string>
     <string name="dday_widget_description">D-Day 위젯</string>
+    <string name="memo_widget_1x1_description">메모 위젯 (1x1)</string>
+    <string name="dday_widget_1x1_description">D-Day 위젯 (1x1)</string>
 </resources>

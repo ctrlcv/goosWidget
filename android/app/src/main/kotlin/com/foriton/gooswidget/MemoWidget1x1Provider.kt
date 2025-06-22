@@ -11,7 +11,7 @@ import android.widget.RemoteViews
 import org.json.JSONArray
 import org.json.JSONObject
 
-class MemoWidgetProvider : AppWidgetProvider() {
+class MemoWidget1x1Provider : AppWidgetProvider() {
     
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         for (appWidgetId in appWidgetIds) {
@@ -24,12 +24,12 @@ class MemoWidgetProvider : AppWidgetProvider() {
             val prefs = context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
             
             // SharedPreferences에서 메모 위젯 데이터 가져오기
-            val memoWidgets = getMemoWidgets(prefs)
+            val memoWidgets = MemoWidgetProvider.getMemoWidgets(prefs)
             
             // 첫 번째 메모 위젯 사용 (나중에 위젯별 설정 추가 가능)
             val widget = memoWidgets.firstOrNull()
             
-            val views = RemoteViews(context.packageName, R.layout.memo_widget)
+            val views = RemoteViews(context.packageName, R.layout.memo_widget_1x1)
             
             if (widget != null) {
                 views.setTextViewText(R.id.memo_content, widget.content)
@@ -50,53 +50,17 @@ class MemoWidgetProvider : AppWidgetProvider() {
                     views.setTextColor(R.id.memo_content, Color.BLACK)
                 }
             } else {
-                views.setTextViewText(R.id.memo_content, "메모를 추가해주세요")
+                views.setTextViewText(R.id.memo_content, "메모 없음")
                 views.setInt(R.id.memo_container, "setBackgroundColor", Color.WHITE)
                 views.setTextColor(R.id.memo_content, Color.BLACK)
             }
             
-            // 앱 열기 인텐트
+            // 앱을 열기 위한 인텐트 설정
             val intent = Intent(context, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(
-                context, 0, intent, 
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
+            val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             views.setOnClickPendingIntent(R.id.memo_container, pendingIntent)
             
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
-        
-        fun getMemoWidgets(prefs: SharedPreferences): List<MemoWidgetData> {
-            val widgetsJson = prefs.getString("flutter.memo_widgets", null)
-            val widgets = mutableListOf<MemoWidgetData>()
-            
-            if (widgetsJson != null) {
-                try {
-                    val jsonArray = JSONArray(widgetsJson)
-                    for (i in 0 until jsonArray.length()) {
-                        val jsonObject = jsonArray.getJSONObject(i)
-                        widgets.add(
-                            MemoWidgetData(
-                                id = jsonObject.getString("id"),
-                                content = jsonObject.getString("content"),
-                                backgroundColor = jsonObject.getString("backgroundColor"),
-                                textColor = jsonObject.getString("textColor")
-                            )
-                        )
-                    }
-                } catch (e: Exception) {
-                    // JSON 파싱 오류 무시
-                }
-            }
-            
-            return widgets
-        }
     }
 }
-
-data class MemoWidgetData(
-    val id: String,
-    val content: String,
-    val backgroundColor: String,
-    val textColor: String
-)
